@@ -13,6 +13,7 @@ import pyautogui
 import time
 import random
 
+pyautogui.PAUSE = 0.0
 
 class Speeds:
     INSTANT = 0.0
@@ -22,7 +23,7 @@ class Speeds:
 
 
 CHAR_MAP = {
-    ' ': Speeds.INSTANT,
+    ' ': Speeds.FAST,
     '(': Speeds.SLOW,
     ')': Speeds.SLOW
 }
@@ -32,7 +33,7 @@ def calc_pause(character=None):
     try:
         return CHAR_MAP[character]
     except KeyError:
-        return random.uniform(0.05, 0.1)
+        return random.uniform(Speeds.FAST, Speeds.SLOW)
 
 print("Before the timer finishes, set your mouse cursor to the IDE")
 
@@ -46,4 +47,4 @@ with open(sys.argv[1], 'r') as input_file:
             time.sleep(calc_pause(c))
             if c == '\n': #  Helps with autocomplete in IDE's
                 pyautogui.keyDown('escape')
-            pyautogui.press(c)
+            pyautogui.typewrite(c, interval=0)
