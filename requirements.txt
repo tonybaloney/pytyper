@@ -1,0 +1,1 @@
+git+https://github.com/tonybaloney/pyautogui.git@callable_interval#egg=pyautogui
